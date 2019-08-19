@@ -55,6 +55,9 @@
 			box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.07);
 		}
 	</style>
+
+	<!-- CSS FILES -->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 </head>
 
 <body>
@@ -123,8 +126,27 @@
 						<span style="letter-spacing: 0.2em; font-size: 0.725rem">FEATURED ARTICLE</span>
 						<h1 class="uk-margin-top uk-margin-small-bottom uk-margin-remove-adjacent">This is a featured
 							blog post</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit dolore magna aliqua.</p>
-						<a href="#" class="uk-button uk-button-default uk-margin-top">GO TO ARTICLE</a>
+						<p>
+							<div class="uk-button-group">
+								<input id="alt-coin" type="text" class="uk-button uk-button-default"
+									value="15sN9a46D2VhpEwcfpM2CKzZqSytQKYRbr" readonly></input>
+								<div class="uk-inline">
+									<button id="alt-coin-name" class="uk-button uk-button-default" type="button">BTC
+										<span uk-icon="icon:  triangle-down"></span></button>
+									<div uk-dropdown="mode: click; boundary: ! .uk-button-group; boundary-align: true;">
+										<ul class="uk-nav uk-dropdown-nav">
+											<li name="alt-coin-item" class="uk-active"><a href="#">BTC:
+													15sN9a46D2VhpEwcfpM2CKzZqSytQKYRbr</a></li>
+											<li name="alt-coin-item" class=""><a href="#">ETH:
+													0xf72A34097dF79BeFf7ad8B7e53e68aE4e4355E9D</a></li>
+											<li name="alt-coin-item" class=""><a href="#">BCH:
+													qq6kdazcl046vvx7s7q66jw7d5u5j500rcdczkew8d</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</p>
+						<a href="https://buy.coingate.com/" class="uk-button uk-button-default uk-margin-top">Donate</a>
 					</div>
 				</div>
 			</div>
@@ -153,7 +175,8 @@
 				<li class="uk-nav-header">eranwez</li>
 				<li class="uk-nav-divider"></li>
 				<li><a href="#"><span class="uk-margin-small-right" data-uk-icon="icon: menu"></span> Home</a></li>
-				<li><a href="#"><span class="uk-margin-small-right" data-uk-icon="icon: menu"></span> Documentation</a></li>
+				<li><a href="#"><span class="uk-margin-small-right" data-uk-icon="icon: menu"></span> Documentation</a>
+				</li>
 				<li><a href="#"><span class="uk-margin-small-right" data-uk-icon="icon: menu"></span> About</a></li>
 			</ul>
 		</div>
@@ -163,6 +186,31 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit-icons.min.js"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#alt-coin').click(function (e) {
+				e.preventDefault()
+				e.target.select();
+				document.execCommand('copy');
+			})
+
+			$('[name=alt-coin-item]').click(function (e) {
+				e.preventDefault()
+				$('[name=alt-coin-item][class="uk-active"]').removeClass('uk-active')
+				$(e.target).parent().addClass('uk-active')
+
+				var address = e.target.innerHTML
+				$('#alt-coin').val(address.substring(5))
+				$('#alt-coin').select();
+				document.execCommand('copy');
+
+				/// BUG 
+				console.log($('#alt-coin-name').first().text(address.substring(0, 3)+' '))
+			})
+
+		})
+	</script>
 </body>
 
 </html>
