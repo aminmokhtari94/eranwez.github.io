@@ -9,6 +9,8 @@
 
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/css/uikit.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit-icons.min.js">
 	<style>
 		nav.nav-scroll {
 			position: relative;
@@ -56,7 +58,7 @@
 		}
 	</style>
 
-	<!-- CSS FILES -->
+	<!-- JS FILES -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 </head>
 
@@ -127,22 +129,37 @@
 						<h1 class="uk-margin-top uk-margin-small-bottom uk-margin-remove-adjacent">This is a featured
 							blog post</h1>
 						<p>
-							<div class="uk-button-group">
-								<input id="alt-coin" type="text" class="uk-button uk-button-default"
-									value="15sN9a46D2VhpEwcfpM2CKzZqSytQKYRbr" readonly></input>
-								<div class="uk-inline">
-									<button id="alt-coin-name" class="uk-button uk-button-default" type="button">BTC
-										<span uk-icon="icon:  triangle-down"></span></button>
-									<div uk-dropdown="mode: click; boundary: ! .uk-button-group; boundary-align: true;">
-										<ul class="uk-nav uk-dropdown-nav">
-											<li name="alt-coin-item" class="uk-active"><a href="#">BTC:
-													15sN9a46D2VhpEwcfpM2CKzZqSytQKYRbr</a></li>
-											<li name="alt-coin-item" class=""><a href="#">ETH:
-													0xf72A34097dF79BeFf7ad8B7e53e68aE4e4355E9D</a></li>
-											<li name="alt-coin-item" class=""><a href="#">BCH:
-													qq6kdazcl046vvx7s7q66jw7d5u5j500rcdczkew8d</a></li>
-										</ul>
-									</div>
+							<div class="uk-inline">
+								<button id="alt-coin" uk-tooltip="Click to copy the altcoin key."
+									class="uk-button uk-button-default" type="button">
+									<span class="uk-margin-small-right" data-uk-icon="icon: copy"></span>
+									<span id="alt-coin-name">BTC</span>:&nbsp;&nbsp;<span id="alt-coin-key">15sN9a46D2VhpEwcfpM2CKzZqSytQKYRbr</span>
+									<span class="uk-margin-medium-left uk-text-bold">&#10549;</span>
+								</button>
+								<div uk-dropdown="pos: bottom-justify">
+									<ul class="uk-nav uk-dropdown-nav uk-text-left">
+										<li class="uk-active">
+											<a href="#">
+												BTC:&nbsp;&nbsp;<span data-alt-coin-name="BTC"
+													name="alt-coin-item">15sN9a46D2VhpEwcfpM2CKzZqSytQKYRbr</span>
+												<span style="float: right;" data-uk-icon="icon: link"></span>
+											</a>
+										</li>
+										<li class="">
+											<a href="#">
+												ETH:&nbsp;&nbsp;<span data-alt-coin-name="ETH"
+													name="alt-coin-item">0xf72A34097dF79BeFf7ad8B7e53e68aE4e4355E9D</span>
+												<span style="float: right;" data-uk-icon="icon: link"></span>
+											</a>
+										</li>
+										<li class="">
+											<a href="#">
+												BCH:&nbsp;&nbsp;<span data-alt-coin-name="BCH"
+													name="alt-coin-item">qq6kdazcl046vvx7s7q66jw7d5u5j500rcdczkew8d</span>
+												<span style="float: right;" data-uk-icon="icon: link"></span>
+											</a>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</p>
@@ -183,32 +200,13 @@
 	</div>
 	<!-- /OFFCANVAS -->
 	<!-- JS FILES -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit-icons.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
-
-			$('#alt-coin').click(function (e) {
-				e.preventDefault()
-				e.target.select();
-				document.execCommand('copy');
-			})
-
-			$('[name=alt-coin-item]').click(function (e) {
-				e.preventDefault()
-				$('[name=alt-coin-item][class="uk-active"]').removeClass('uk-active')
-				$(e.target).parent().addClass('uk-active')
-
-				var address = e.target.innerHTML
-				$('#alt-coin').val(address.substring(5))
-				$('#alt-coin').select();
-				document.execCommand('copy');
-
-				/// BUG 
-				console.log($('#alt-coin-name').first().text(address.substring(0, 3)+' '))
-			})
-
+			// clipboard.min.js
 		})
 	</script>
 </body>
